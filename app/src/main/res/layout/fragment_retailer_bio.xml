@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card3"
+    tools:context=".RetailerBioFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@color/signup_btn"
+    android:layout_height="wrap_content"
+    android:paddingBottom="30dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_person_pin_24"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/profile"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="biolink"
+        android:textColor="@color/white"
+        android:paddingBottom="10dp"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/profile"
+        android:id="@+id/bio"
+        />
+
+
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <ScrollView
+        android:layout_below="@+id/bio"
+        android:layout_width="match_parent"
+        android:background="@color/back"
+        android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_below="@+id/bio"
+            android:id="@+id/Add_Facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:drawableLeft="@drawable/ic_baseline_face_24"
+            android:text="What is Biolink?"
+            android:textSize="18dp"
+            android:drawablePadding="10dp"
+            android:textColor="#000000"
+            android:background="@drawable/input_field"/>
+
+    </RelativeLayout>
+    </ScrollView>
+    </RelativeLayout>
+</FrameLayout>
