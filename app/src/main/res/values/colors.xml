@@ -9,7 +9,7 @@
     <color name="card2">#66ff66</color>
     <color name="card3">#f6f6f6</color>
 
-
+<color name="grey">#C0C0C0</color>
 
     //Drawables
     <color name="signin_btn">#3B3E51</color>

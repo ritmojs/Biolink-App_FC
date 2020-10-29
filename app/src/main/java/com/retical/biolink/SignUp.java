@@ -86,7 +86,7 @@ public class SignUp extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         final HashMap<String, String> params = new HashMap<>();
-        params.put("username", name);
+        params.put("name", name);
         params.put("email", email);
         params.put("password", password);
         params.put("SharedId",username);

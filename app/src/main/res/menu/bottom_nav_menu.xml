@@ -19,6 +19,7 @@
         android:id="@+id/bottom_nav_bio"
         android:icon="@drawable/ic_baseline_face_24"
 
+
         android:title="Bio"
         app:cnb_backgroundColor="@color/signup_btn"/>
 

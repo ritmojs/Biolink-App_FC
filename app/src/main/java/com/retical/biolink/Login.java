@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 import com.retical.biolink.UtilsService.SharedPreferenceClass;
 import com.retical.biolink.UtilsService.UtilService;
 
@@ -101,8 +102,16 @@ public class Login extends AppCompatActivity {
                 {
                     try {
                         String token = response.getString("token");
+                        JSONObject user =response.getJSONObject("user");
+                        String id=user.getString("_id");
+                        String email=user.getString("email");
+
+
 
                         sharedPreferenceClass.setValue_string("token", token);
+
+                        sharedPreferenceClass.setValue_string("email", email);
+                        sharedPreferenceClass.setValue_string("id",id);
                         startActivity(new Intent(Login.this, Home.class));
 
                     } catch (JSONException e) {
