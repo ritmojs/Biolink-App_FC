@@ -43,11 +43,11 @@ import java.util.Map;
 
 public class RetailerDashboardFragment extends Fragment {
 
-    TextView mAdd,mNoLink;
-    ImageView mLink;
+    TextView mAdd,mNoLink,mADD,mName,mShare;
+    ImageView mLink,mView,mpreview;
     ProgressBar progressBar;
     SharedPreferences mPref;
-    String Id,token;
+    String Id,token,SharedId,name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,9 +60,59 @@ public class RetailerDashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mPref=this.getActivity().getSharedPreferences("user_todo", Context.MODE_PRIVATE);
         Id=mPref.getString("id","");
+        SharedId=mPref.getString("SharedId","");
         token=mPref.getString("token","");
+        name=mPref.getString("name","");
         mAdd = view.findViewById(R.id.AddBio);
+        mAdd.setText(name);
+        mADD=view.findViewById(R.id.AddLink);
+        mADD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),AddLink.class);
+                startActivity(intent);
+            }
+        });
+        mpreview=view.findViewById(R.id.preview);
+        mShare=view.findViewById(R.id.Share);
         mLink = view.findViewById(R.id.link);
+        mView=view.findViewById(R.id.views);
+        mShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT,"Hello Friend! I am Sharing my Contact details. You Can Contact me on:"+"https://biolink-app.herokuapp.com/"+SharedId);
+                startActivity(i.createChooser(i, "Share using:"));
+
+            }
+        });
+
+        mpreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),Webpage.class);
+               String  url="https://biolink-app.herokuapp.com/"+SharedId+"/";
+                intent.putExtra("url",url);
+                startActivity(intent);
+            }
+        });
+
+        mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewDialog();
+            }
+            private void ViewDialog() {
+                View view = getLayoutInflater().inflate(R.layout.views, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setView(view).show();
+                progressBar=view.findViewById(R.id.prog);
+                mNoLink=view.findViewById(R.id.Nolink);
+                //Start Fetching From NODE JS SERVER
+                checkViews(view);
+            }
+        });
 
         mLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +142,68 @@ public class RetailerDashboardFragment extends Fragment {
 
     }
 
-//FUNCTION TO FETCH DATA FROM NODE BACKEND
+    private void checkViews(View view) {
+        progressBar.setVisibility(View.VISIBLE);
+        String apiKey = "https://biolink-app.herokuapp.com/api/user/biolink/dashboard/"+Id;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                apiKey,new JSONObject(), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("DATA:",response.toString());
+                if(response.has("role"))
+                {
+
+                    String role= null;
+                    try {
+                         role = response.getString("role");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    mNoLink.setVisibility(View.VISIBLE);
+                    mNoLink.setText(role);
+                    progressBar.setVisibility(View.GONE);
+
+                }
+                else {
+                    Toast.makeText(getActivity(), "Not Success", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data, HttpHeaderParser.parseCharset(response.headers,  "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        Toast.makeText(getContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                    } catch (JSONException | UnsupportedEncodingException je) {
+                        je.printStackTrace();
+                        progressBar.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer "+token);
+                return headers;
+            }
+        };
+        // set retry policy
+        int socketTime = 3000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTime,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjectRequest.setRetryPolicy(policy);
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+//FUNCTION TO FETCH DATA FROM NODE BACKEND FOR NO OF LINKS
     private void checkLink(View view) {
         progressBar.setVisibility(View.VISIBLE);
         String apiKey = "https://biolink-app.herokuapp.com/api/user/biolink/dashboard/"+Id;

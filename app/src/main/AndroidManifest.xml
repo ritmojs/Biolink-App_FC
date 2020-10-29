@@ -6,12 +6,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/biolink"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/biolink"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddLink"></activity>
+        <activity android:name=".Phone"></activity>
+        <activity android:name=".Email" />
+        <activity android:name=".Telegram" />
+        <activity android:name=".WhatsApp" />
+        <activity android:name=".Webpage" />
+        <activity android:name=".AddLink" />
         <activity android:name=".Home" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUp" />

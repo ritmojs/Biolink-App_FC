@@ -199,6 +199,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/EditLink"
             android:layout_below="@+id/AddLink"
             android:textSize="20dp"
             android:background="@drawable/input_field"
@@ -209,6 +210,20 @@
             android:drawableLeft="@drawable/ic_baseline_edit_attributes_24"
             android:layout_marginRight="20dp"
             android:text="Edit Links"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Share"
+            android:layout_below="@+id/EditLink"
+            android:textSize="20dp"
+            android:background="@drawable/input_field"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/signin_btn"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/signup_btn"
+            android:drawableLeft="@drawable/ic_baseline_share_24"
+            android:layout_marginRight="20dp"
+            android:text="Share BioLink Profile"/>
 
     </RelativeLayout>
 </RelativeLayout>   

@@ -105,13 +105,16 @@ public class Login extends AppCompatActivity {
                         JSONObject user =response.getJSONObject("user");
                         String id=user.getString("_id");
                         String email=user.getString("email");
+                        String SharedId=user.getString("SharedId");
+                        String name=user.getString("name");
 
 
 
                         sharedPreferenceClass.setValue_string("token", token);
-
+                        sharedPreferenceClass.setValue_string("SharedId",SharedId);
                         sharedPreferenceClass.setValue_string("email", email);
                         sharedPreferenceClass.setValue_string("id",id);
+                        sharedPreferenceClass.setValue_string("name",name);
                         startActivity(new Intent(Login.this, Home.class));
 
                     } catch (JSONException e) {
