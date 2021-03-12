@@ -192,8 +192,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/signin_btn"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/signup_btn"
-            android:drawableLeft="@drawable/ic_baseline_link_24"
+            android:drawableLeft="@drawable/addlink"
             android:layout_marginRight="20dp"
             android:text="Add Link"/>
         <TextView
@@ -206,8 +205,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/signin_btn"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/signup_btn"
-            android:drawableLeft="@drawable/ic_baseline_edit_attributes_24"
+            android:drawableLeft="@drawable/editlink"
             android:layout_marginRight="20dp"
             android:text="Edit Links"/>
         <TextView
@@ -220,8 +218,8 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/signin_btn"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/signup_btn"
-            android:drawableLeft="@drawable/ic_baseline_share_24"
+
+            android:drawableLeft="@drawable/sharelink"
             android:layout_marginRight="20dp"
             android:text="Share BioLink Profile"/>
 

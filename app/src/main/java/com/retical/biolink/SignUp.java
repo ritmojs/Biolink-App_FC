@@ -97,6 +97,7 @@ public class SignUp extends AppCompatActivity {
                 apiKey, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.d("USER",response.toString());
 
                 if(response.has("User"))
                 {

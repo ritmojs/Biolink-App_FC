@@ -43,7 +43,7 @@ import java.util.Map;
 
 public class RetailerDashboardFragment extends Fragment {
 
-    TextView mAdd,mNoLink,mADD,mName,mShare;
+    TextView mAdd,mNoLink,mADD,mEdit,mShare;
     ImageView mLink,mView,mpreview;
     ProgressBar progressBar;
     SharedPreferences mPref;
@@ -64,6 +64,14 @@ public class RetailerDashboardFragment extends Fragment {
         token=mPref.getString("token","");
         name=mPref.getString("name","");
         mAdd = view.findViewById(R.id.AddBio);
+        mEdit= view.findViewById(R.id.EditLink);
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),EditLink.class);
+                startActivity(intent);
+            }
+        });
         mAdd.setText(name);
         mADD=view.findViewById(R.id.AddLink);
         mADD.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +90,7 @@ public class RetailerDashboardFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT,"Hello Friend! I am Sharing my Contact details. You Can Contact me on:"+"https://biolink-app.herokuapp.com/"+SharedId);
+                i.putExtra(Intent.EXTRA_TEXT,"Hello Friend! I am Sharing my Contact details. You Can Contact me on:"+"http://bilk.me/"+SharedId);
                 startActivity(i.createChooser(i, "Share using:"));
 
             }
